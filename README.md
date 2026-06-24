@@ -1,3 +1,5 @@
+
+
 # TriTeam-ECommerce-Platform
 
 # CPAN-228 Web Application Development: Semester Project
@@ -24,7 +26,7 @@ Our domain model maps out an inventory and distribution ecosystem using the foll
 * **TRANSFER:** `TransferID` (PK), `FromLocationID` (FK), `ToLocationID` (FK), `ProductID` (FK), `Quantity`, `Status`, `TransferDate`, `Notes`
 
 #### Domain Model ERD
-![ER Diagram](images/E-Commerce_Entity_Relationship_Diagram_.webp)
+![ER Diagram]<img width="1020" height="868" alt="Entity Relationship Diagram1" src="https://github.com/user-attachments/assets/b6a76a83-80a6-4294-8fc1-2269d4ad9721" />
 
 ### UI Layout Design & Wireframes
 Below are the wireframes illustrating our main application pages:
