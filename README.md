@@ -1,5 +1,6 @@
 
 
+
 # TriTeam-ECommerce-Platform
 
 # CPAN-228 Web Application Development: Semester Project
@@ -38,7 +39,7 @@ Below are the wireframes illustrating our main application pages:
 * **Cart Summary Flow:** Outlines product tiles alongside a transaction subtotal breakdown.
   <img width="1920" height="1080" alt="CartSummary" src="https://github.com/user-attachments/assets/d0a6fa38-2a0f-47d6-b30b-a813b04d6f66" />
 * **Login View:** an authentication screen containing a centralized login form within the content container.
-  <img width="1920" height="1080" alt="CartSummary" src="https://github.com/user-attachments/assets/d0a6fa38-2a0f-47d6-b30b-a813b04d6f66" />
+  <img width="1920" height="1080" alt="Login" src="https://github.com/user-attachments/assets/45b6375b-d341-45ec-94cd-ff2b03ee44a9" />
 
 ### How to Run the Project
 1. Clone this repository using Git.
