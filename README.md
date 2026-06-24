@@ -7,7 +7,7 @@
 - **Group Name:** Tri-Team
 - **Developer 1:** Alton Hudson - I am a member of our e-commerce project using Spring Boot. I’m building my skills in software development and enjoy gaining hands-on experience by working on real projects.
 - **Developer 2:** Anthony Murphy - As a Tri-Team developer I plan on building my skills and knowledge of Java web development to create functional and scalable software with real world applications.
-- **Developer 3:** Matthew Walker - (_developer intro_)
+- **Developer 3:** Matthew Walker - I enjoy turning ideas into practical applications, which is why I’m excited to work on our e-commerce project. My goal is to strengthen my web development skills and learn more about Java frameworks.
 
 ### Category Choice & Rationale
 
