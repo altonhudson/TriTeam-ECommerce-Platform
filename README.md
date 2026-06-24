@@ -6,7 +6,7 @@
 
 ### Team Roster & Introductions
 * **Group Name:** Tri-Team
-* **Developer 1:** Alton Hudson - (*developer intro*)
+* **Developer 1:** Alton Hudson - I am a member of our e-commerce project using Spring Boot. I’m building my skills in software development and enjoy gaining hands-on experience by working on real projects.
 * **Developer 2:** Anthony Murphy - (*developer intro*)
 * **Developer 3:** Matthew Walker - (*developer intro*)
 
@@ -26,19 +26,19 @@ Our domain model maps out an inventory and distribution ecosystem using the foll
 * **TRANSFER:** `TransferID` (PK), `FromLocationID` (FK), `ToLocationID` (FK), `ProductID` (FK), `Quantity`, `Status`, `TransferDate`, `Notes`
 
 #### Domain Model ERD
-![ER Diagram]<img width="1020" height="868" alt="Entity Relationship Diagram1" src="https://github.com/user-attachments/assets/b6a76a83-80a6-4294-8fc1-2269d4ad9721" />
+<img width="1020" height="868" alt="Entity Relationship Diagram1" src="https://github.com/user-attachments/assets/b6a76a83-80a6-4294-8fc1-2269d4ad9721" />
 
 ### UI Layout Design & Wireframes
 Below are the wireframes illustrating our main application pages:
 
 * **Home / Dashboard View:** Features a top banner, a floating navigation bar with a search component, and an evenly tiled category layout utilizing lazy loading.
-  * ![Home Screen View](images/HomeScreen.jpg)
+  <img width="1920" height="1080" alt="HomeScreen" src="https://github.com/user-attachments/assets/c3ce6621-dad3-44b8-a2b6-8b49e07f0cf1" />
 * **List View:** Displays active product categories within a tile container paired with a functional filter component
-  * ![Category List View](images/Category.jpg)
+  <img width="1920" height="1080" alt="Category" src="https://github.com/user-attachments/assets/3c2c5746-a595-46e1-b135-d5496c1d3627" />
 * **Cart Summary Flow:** Outlines product tiles alongside a transaction subtotal breakdown.
-  * ![Cart Summary View](images/CartSummary.jpg)
+  <img width="1920" height="1080" alt="CartSummary" src="https://github.com/user-attachments/assets/d0a6fa38-2a0f-47d6-b30b-a813b04d6f66" />
 * **Login View:** an authentication screen containing a centralized login form within the content container.
-  * ![Login Screen View](images/Login.jpg)
+  <img width="1920" height="1080" alt="CartSummary" src="https://github.com/user-attachments/assets/d0a6fa38-2a0f-47d6-b30b-a813b04d6f66" />
 
 ### How to Run the Project
 1. Clone this repository using Git.
