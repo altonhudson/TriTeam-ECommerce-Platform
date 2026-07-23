@@ -1,0 +1,30 @@
+package com.triteam.model;
+
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User implements UserDetails {
+
+    private String username, password, role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {// refine functionality
+        return List.of(new SimpleGrantedAuthority(role != null ? role : "ROLE_USER"));
+    }
+
+}
