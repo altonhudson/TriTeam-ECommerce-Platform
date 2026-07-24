@@ -20,7 +20,7 @@ public class TriTeamECommerceApplication {
     public CommandLineRunner initAdminUser(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             // Check if an admin user already exists so we don't recreate it every restart
-            if (userRepository.findByUsername("admin") == null) {
+            if (userRepository.findByUsername("admin").isEmpty()) {
                 User admin = new User();
                 admin.setUsername("admin");
                 // Encrypt the password 'admin123'
