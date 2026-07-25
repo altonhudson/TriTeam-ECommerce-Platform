@@ -15,13 +15,16 @@ public class Transfer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transferId;
 
-    @Column(name = "from_locatio_id")
+    @ManyToOne
+    @JoinColumn(name = "from_location_id")
     private Location fromLocation;
 
-    @Column(name = "to_location_id")
+    @ManyToOne
+    @JoinColumn(name = "to_location_id")
     private Location toLocation;
 
-    @Column(name = "product_id")
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private Integer quantity;

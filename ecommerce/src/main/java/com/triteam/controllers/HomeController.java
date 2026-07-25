@@ -9,7 +9,7 @@ public class HomeController {
     // service declaration
 
     @GetMapping("/home")
-    public String getProductCatalog(@RequestParam String param) {
+    public String getProductCatalog(@RequestParam(required = false) String param) {
         // home page provides filterable/searchable list view of products catalogued in
         // database
         return "home";
