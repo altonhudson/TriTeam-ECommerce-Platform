@@ -1,0 +1,3 @@
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('COMP-001', 'Sample Laptop', 999.99, 'computers', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('AUD-001', 'Wireless Headphones', 149.99, 'audio', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('PHONE-001', 'Smartphone Pro', 799.99, 'smartphones', CURRENT_TIMESTAMP);

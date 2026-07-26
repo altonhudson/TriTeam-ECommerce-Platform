@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Injecting head fragment -->
+<head th:replace="~{fragments :: head('Categories - TriTeam E-Commerce')}"></head>
+<body class="bg-light">
+    <!-- Banner -->
+    <div class="banner border-bottom">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Shop Products</h1>
+            <p class="lead">Browse our catalog and find exactly what you need.</p>
+        </div>
+    </div>
+    <!-- Injecting the navbar fragment -->
+    <div th:replace="~{fragments :: navbar}"></div>
+    <!-- Category Screen Container -->
+    <div class="container mt-4 mb-5">
+        <div class="row">
+            <!-- Sidebar Filter Component -->
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Filter & Sort</h5>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/category}" method="get">
+                            <!-- Category Filter -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" name="category">
+                                    <option value="all" th:selected="${activeCategory == 'all'}">All Categories</option>
+                                    <option value="computers" th:selected="${activeCategory == 'computers'}">Computers</option>
+                                    <option value="smartphones" th:selected="${activeCategory == 'smartphones'}">Smartphones</option>
+                                    <option value="audio" th:selected="${activeCategory == 'audio'}">Audio</option>
+                                    <option value="accessories" th:selected="${activeCategory == 'accessories'}">Accessories</option>
+                                    <option value="networking" th:selected="${activeCategory == 'networking'}">Networking</option>
+                                    <option value="office" th:selected="${activeCategory == 'office'}">Office Supplies</option>
+                                </select>
+                            </div>
+                            <!-- Price Range Filter -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Max Price: $<span id="priceDisplay" th:text="${currentMaxPrice != null ? #numbers.formatDecimal(currentMaxPrice, 1, 2) : '2000.00'}">2000.00</span></label>
+                                <input type="range" class="form-range" min="0" max="2000" step="50" name="maxPrice"
+                                       th:value="${currentMaxPrice != null ? currentMaxPrice : 2000}" 
+                                       oninput="document.getElementById('priceDisplay').innerText = Number(this.value).toFixed(2)">
+                            </div>
+                            <hr>
+                            <!-- Sort Options -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Sort By</label>
+                                <select class="form-select" name="sort">
+                                    <option value="name_asc" th:selected="${currentSort == 'name_asc'}">Name (A-Z)</option>
+                                    <option value="name_desc" th:selected="${currentSort == 'name_desc'}">Name (Z-A)</option>
+                                    <option value="price_asc" th:selected="${currentSort == 'price_asc'}">Price (Low to High)</option>
+                                    <option value="price_desc" th:selected="${currentSort == 'price_desc'}">Price (High to Low)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Tile Container -->
+            <div class="col-md-9">
+                <!-- Only render the grid if products exist -->
+                <div th:if="${not #lists.isEmpty(products)}" class="row row-cols-1 row-cols-md-3 g-4">
+                    <!-- Generate a card for every product in the db -->
+                    <div class="col" th:each="product : ${products}">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <!-- Dynamically inject the product name, category, and price -->
+                                <h5 class="card-title" th:text="${product.name}">Product Name Placeholder</h5>
+                                <p class="text-muted small text-capitalize" th:text="${product.category}">Category</p>
+                                <p class="fw-bold fs-5" th:text="'$' + ${#numbers.formatDecimal(product.unitPrice, 1, 2)}">$0.00</p>
+                                
+                                <form th:action="@{/cart/add}" method="post">
+                                    <input type="hidden" name="productId" th:value="${product.productId}" />
+                                    <button type="submit" class="btn btn-outline-success btn-sm w-100">Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                
+                <!-- Pagination Controls -->
+                <nav th:if="${totalPages > 1}" class="mt-4 d-flex justify-content-center" aria-label="Product navigation">
+                    <ul class="pagination">
+                        <!-- Previous Page Button -->
+                        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                            <a class="page-link" 
+                            th:href="@{/category(category=${activeCategory}, maxPrice=${currentMaxPrice}, sort=${currentSort}, page=${currentPage - 1})}">
+                                Previous
+                            </a>
+                        </li>  
+                        <!-- Page Number -->
+                        <li class="page-item disabled">
+                            <span class="page-link" th:text="'Page ' + (${currentPage + 1}) + ' of ' + ${totalPages}">Page 1 of 1</span>
+                        </li>
+                        <!-- Next Page Button -->
+                        <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                            <a class="page-link" 
+                            th:href="@{/category(category=${activeCategory}, maxPrice=${currentMaxPrice}, sort=${currentSort}, page=${currentPage + 1})}">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Fallback if no products are found in a category -->
+                <div th:if="${#lists.isEmpty(products)}" class="d-flex justify-content-center align-items-center w-100 mt-5">
+                    <h4 class="text-muted text-center">No products found in this category.</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Injecting footer scripts -->
+    <div th:replace="~{fragments :: footerScripts}"></div>
+</body>
+</html>

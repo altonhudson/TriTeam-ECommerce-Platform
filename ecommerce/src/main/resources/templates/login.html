@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Injecting head fragment -->
+<head th:replace="~{fragments :: head('Login - TriTeam E-Commerce')}"></head>
+<body class="bg-light">
+    <!-- Banner -->
+    <div class="banner border-bottom">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Sign In</h1>
+            <p class="lead">Access your account and track your orders.</p>
+        </div>
+    </div>
+    <!-- Injecting the navbar fragment -->
+    <div th:replace="~{fragments :: navbar}"></div>
+    <!-- Login Screen Content Container -->
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-header bg-dark text-white text-center py-3">
+                        <h4 class="mb-0">Welcome Back</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Display error message if Spring Security redirects with ?error -->
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                            Invalid username or password.
+                        </div>
+                        <!-- Display logout message if redirected with ?logout -->
+                        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                            You have been logged out successfully.
+                        </div>
+                        <!-- Login Form -->
+                        <form th:action="@{/login}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-bold">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-bold">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Injecting footer scripts -->
+    <div th:replace="~{fragments :: footerScripts}"></div>
+</body>
+</html>

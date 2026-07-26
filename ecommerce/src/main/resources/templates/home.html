@@ -1,11 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>You have logged in </p>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Injecting head fragment -->
+<head th:replace="~{fragments :: head('Home - TriTeam E-Commerce')}"></head>
+<body class="bg-light">
+    <!-- Banner -->
+    <div class="banner border-bottom">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Welcome to TriTeam E-Commerce</h1>
+            <p class="lead">Your one-stop shop for electronics and more.</p>
+        </div>
+    </div>
+    <!-- Injecting the navbar fragment -->
+    <div th:replace="~{fragments :: navbar}"></div>
+    <!-- Home Screen Content Container -->
+    <div class="container mt-4">
+        <h3 class="mb-3">Top Categories</h3>
+        
+        <!-- Home Screen Tile Container (Lazy Load placeholder) -->
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+            <!-- Tile 1 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <h5 class="card-title">Computers</h5>
+                        <a th:href="@{/category(param='computers')}" class="btn btn-primary mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Tile 2 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <h5 class="card-title">Smartphones</h5>
+                        <a th:href="@{/category(param='smartphones')}" class="btn btn-primary mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Tile 3 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <h5 class="card-title">Accessories</h5>
+                        <a th:href="@{/category(param='accessories')}" class="btn btn-primary mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Tile 4 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <h5 class="card-title">Audio</h5>
+                        <a th:href="@{/category(param='audio')}" class="btn btn-primary mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Tile 5 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <h5 class="card-title">Networking</h5>
+                        <a th:href="@{/category(param='networking')}" class="btn btn-primary mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Tile 6 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <h5 class="card-title">Office Supplies</h5>
+                        <a th:href="@{/category(param='office')}" class="btn btn-primary mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Injecting footer scripts -->
+    <div th:replace="~{fragments :: footerScripts}"></div>
 </body>
 </html>
