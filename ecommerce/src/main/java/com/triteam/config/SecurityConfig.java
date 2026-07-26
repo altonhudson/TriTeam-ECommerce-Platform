@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .formLogin(form -> form
-                        // .loginPage("/login") uncomment when/if we make a login page
+                        .loginPage("/login") // uncomment when/if we make a login page
                         .defaultSuccessUrl("/home", true)
                         .permitAll())
                 .logout(logout -> logout
