@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.triteam.entity.Product;
 import com.triteam.repository.ProductRepository;
+import com.triteam.service.CartService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,18 +17,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class CheckoutController {
+public class CartController {
+
+    private final CartService cartService;
     private final ProductRepository productRepository;
 
-    public CheckoutController(ProductRepository productRepository) {
+    public CartController(CartService cartService, ProductRepository productRepository) {
+        this.cartService = cartService;
         this.productRepository = productRepository;
     }
 
     @GetMapping("/checkout")
-    public String getCartDetails(@RequestParam(required = false, defaultValue = "view") String param, HttpSession session, Model model) {
+    public String getCartDetails(@RequestParam(required = false, defaultValue = "view") String param,
+            HttpSession session, Model model) {
         // Retrieving the cart from the session
         List<Product> cart = (List<Product>) session.getAttribute("cart");
-        
+
         if (cart == null) {
             cart = new ArrayList<>();
         }
@@ -50,20 +55,20 @@ public class CheckoutController {
     // Route for adding an item to the cart
     @PostMapping("/cart/add")
     public String addToCart(@RequestParam Long productId, HttpSession session, HttpServletRequest request) {
-        // Retrieve the cart from the session
-        List<Product> cart = (List<Product>) session.getAttribute("cart");
+        // 1. Persist to database via your CartService
+        cartService.addProductToCart(productId);
 
+        // 2. Keep teammate's session logic synchronized for checkout views
+        List<Product> cart = (List<Product>) session.getAttribute("cart");
         if (cart == null) {
             cart = new ArrayList<>();
         }
-        
-        // Add the product
         productRepository.findById(productId).ifPresent(cart::add);
         session.setAttribute("cart", cart);
-        
-        // Retrieve current URL (including the filter URL params)
+
+        // 3. Redirect back to wherever the user was originally (Home, Category, etc.)
         String referer = request.getHeader("Referer");
-        return "redirect:" + referer;
+        return "redirect:" + (referer != null ? referer : "/home");
     }
 
     // Route for removing an item from the cart
@@ -71,9 +76,10 @@ public class CheckoutController {
     public String removeFromCart(@RequestParam Long productId, HttpSession session) {
         // Retrieve the cart from the session
         List<Product> cart = (List<Product>) session.getAttribute("cart");
-        
+
         if (cart != null) {
-            // Iterate through the cart product list and remove the first instance of the product
+            // Iterate through the cart product list and remove the first instance of the
+            // product
             for (int i = 0; i < cart.size(); i++) {
                 if (cart.get(i).getProductId().equals(productId)) {
                     cart.remove(i);
@@ -83,7 +89,7 @@ public class CheckoutController {
             // Save the updated list back to the session
             session.setAttribute("cart", cart);
         }
-        
+
         // redirecting back to the checkout page to display their updated cart/total
         return "redirect:/checkout";
     }
