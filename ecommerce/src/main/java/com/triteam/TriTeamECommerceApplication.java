@@ -17,7 +17,7 @@ public class TriTeamECommerceApplication {
     }
 
     @Bean
-    public CommandLineRunner initAdminUser(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public CommandLineRunner initData(UserRepository userRepository, com.triteam.repository.ProductRepository productRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             // Check if an admin user already exists so we don't recreate it every restart
             if (userRepository.findByUsername("admin").isEmpty()) {
