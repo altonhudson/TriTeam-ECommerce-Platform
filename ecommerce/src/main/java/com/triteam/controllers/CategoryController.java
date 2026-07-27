@@ -24,6 +24,7 @@ public class CategoryController {
             @RequestParam(required = false, defaultValue = "2000") Double maxPrice,
             @RequestParam(required = false, defaultValue = "name_asc") String sort,
             @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "") String keyword, // search parameter
             Model model) {
 
         // Determine the active category
@@ -43,17 +44,16 @@ public class CategoryController {
             jpaSort = org.springframework.data.domain.Sort.by(Product::getName).ascending();
         }
 
-        // Create a Pageable object: requesting a specific page, 6 items per page,
+        // Create a Pageable object: requesting a specific page 6 items per page,
         // applying our sort
-        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, 6,
-                jpaSort);
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, 6, jpaSort);
 
-        // Applying Filters (Category and Max Price) from the URL Parameter
+        // Applying Filters (Category, Max Price and Keyword) from the URL Parameter
         org.springframework.data.domain.Page<Product> productPage;
         if ("all".equalsIgnoreCase(activeCategory)) {
-            productPage = productRepository.findByUnitPriceLessThanEqual(maxPrice, pageable);
+            productPage = productRepository.findByUnitPriceLessThanEqualAndNameContainingIgnoreCase(maxPrice, keyword, pageable);
         } else {
-            productPage = productRepository.findByCategoryAndUnitPriceLessThanEqual(activeCategory, maxPrice, pageable);
+            productPage = productRepository.findByCategoryAndUnitPriceLessThanEqualAndNameContainingIgnoreCase(activeCategory, maxPrice, keyword, pageable);
         }
 
         // Passing the filtered list to the Thymeleaf frontend html template under
@@ -69,6 +69,7 @@ public class CategoryController {
         model.addAttribute("activeCategory", activeCategory);
         model.addAttribute("currentMaxPrice", maxPrice);
         model.addAttribute("currentSort", sort);
+        model.addAttribute("keyword", keyword);
 
         return "category";
     }
