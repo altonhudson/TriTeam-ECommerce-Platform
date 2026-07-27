@@ -33,13 +33,21 @@ public class Product {
     @Max(value = 10000, message = "Price can't exceed $10,000")
     private Double unitPrice;
 
-    // Can be computers, smartphones, audio, accessories, networking or office supplies
+    // Can be computers, smartphones, audio, accessories, networking or office
+    // supplies
     @NotBlank(message = "A category is mandatory")
     @Pattern(regexp = "^(computers|smartphones|audio|accessories|networking|office)$", message = "Invalid category selected")
-    private String category;
-;
+    private String category;;
     private Double weightKg;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory;
 
     @CreationTimestamp
     @Column(updatable = false)
