@@ -11,8 +11,8 @@
 
 ### Deliverable 1: Team Contributions
 
-- **Alton Hudson:** Created the JPA entity classes and repository interfaces for the project's database tables. Added the dummy data used to populate the database so the application starts with realistic sample records that the team can use for testing and development.
-- **Anthony Murphy:** [Write contributions].
+- **Alton Hudson:** I contributed by creating the JPA entity classes and repository interfaces for the project's database tables. I also wrote the dummy data used to populate the database so the application starts with realistic sample records that the team can use for testing and development.
+- **Anthony Murphy:** Created Controllers and Services that handle endpoints and data submission, performed bug fixing and project alignment ensuring cohesion of all branches.
 - **Matthew Walker:** Implemented the Thymeleaf frontend templates (home, category, add-product), built server-side pagination & search logic in `CategoryController` and configured server-side form validation for the `Product` entity.
 
 ### How to Run the Project
@@ -20,12 +20,12 @@
 1. Clone this repository using Git.
 2. Open your terminal and navigate into the root of the project directory where the `pom.xml` file is located.
 3. Run the application using the included Maven wrapper:
-   * **Mac/Linux:** `./mvnw clean spring-boot:run`
-   * **Windows:** `mvnw clean spring-boot:run`
+   - **Mac/Linux:** `./mvnw clean spring-boot:run`
+   - **Windows:** `mvnw clean spring-boot:run`
 4. Once the server starts up, open a web browser and navigate to `http://localhost:8080`.
 5. Log in using the following admin credentials:
-   * **Username:** `admin`
-   * **Password:** `admin123`
+   - **Username:** `admin`
+   - **Password:** `admin123`
 
 ### Category Choice & Rationale
 
