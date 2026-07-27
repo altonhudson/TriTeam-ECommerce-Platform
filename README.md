@@ -11,7 +11,7 @@
 
 ### Deliverable 1: Team Contributions
 
-- **Alton Hudson:** I contributed by creating the JPA entity classes and repository interfaces for the project's database tables. I also wrote the dummy data used to populate the database so the application starts with realistic sample records that the team can use for testing and development.
+- **Alton Hudson:** Created the JPA entity classes and repository interfaces for the project's database tables. Added the dummy data used to populate the database so the application starts with realistic sample records that the team can use for testing and development.
 - **Anthony Murphy:** [Write contributions].
 - **Matthew Walker:** Implemented the Thymeleaf frontend templates (home, category, add-product), built server-side pagination & search logic in `CategoryController` and configured server-side form validation for the `Product` entity.
 
