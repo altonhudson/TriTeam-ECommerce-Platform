@@ -23,8 +23,9 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/category(param='all')}">Categories</a></li>
                 </ul>
-                <form class="d-flex me-3">
-                    <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                <!-- Search Form -->
+                <form class="d-flex" th:action="@{/category}" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search" name="keyword" th:value="${keyword}">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav">
