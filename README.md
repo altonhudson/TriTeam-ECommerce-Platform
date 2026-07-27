@@ -61,11 +61,3 @@ Below are the wireframes illustrating our main application pages:
 
 * **Login View:** an authentication screen containing a centralized login form within the content container.
   <img width="1920" height="1080" alt="Login" src="https://github.com/user-attachments/assets/45b6375b-d341-45ec-94cd-ff2b03ee44a9" />
-
-### How to Run the Project
-
-1. Clone this repository using Git.
-2. Open the project folder in your Java IDE of choice
-3. Ensure Maven dependencies are downloaded (Web, Thymeleaf, JPA, Security and Data REST).
-4. Run the main Spring Boot application class.
-5. Open a web browser and navigate to `http://localhost:8080`.
