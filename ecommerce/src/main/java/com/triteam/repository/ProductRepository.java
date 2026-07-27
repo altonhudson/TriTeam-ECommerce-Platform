@@ -9,9 +9,12 @@ import org.springframework.data.domain.Pageable;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    // Finds products filtered by category and price limit with pagination + sorting
-    Page<Product> findByCategoryAndUnitPriceLessThanEqual(String category, Double unitPrice, Pageable pageable);
+    // Finds products filtered by category, price limit and a text keyword
+    // (case-insensitive)
+    Page<Product> findByCategoryAndUnitPriceLessThanEqualAndNameContainingIgnoreCase(String category, Double unitPrice,
+            String keyword, Pageable pageable);
 
-    // Finds products filtered only by price limit with pagination + sorting)
-    Page<Product> findByUnitPriceLessThanEqual(Double unitPrice, Pageable pageable);
+    // Finds products filtered by price limit and a text keyword (case-insensitive)
+    Page<Product> findByUnitPriceLessThanEqualAndNameContainingIgnoreCase(Double unitPrice, String keyword,
+            Pageable pageable);
 }
