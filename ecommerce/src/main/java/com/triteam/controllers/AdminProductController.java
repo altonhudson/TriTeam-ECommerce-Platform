@@ -17,7 +17,9 @@ public class AdminProductController {
 
     private final ProductRepository productRepository;
     private final SupplierRepository supplierRepository;
-    private final InventoryRepository inventoryRepository;
+    private final InventoryRepository inventoryRepository; // currently saves new products to the product repo but
+                                                           // doesn't save to the inventory repo, consider an ADMIN
+                                                           // action to update inventory repo?
 
     public AdminProductController(ProductRepository productRepository, SupplierRepository supplierRepository,
             InventoryRepository inventoryRepository) {
@@ -26,14 +28,14 @@ public class AdminProductController {
         this.supplierRepository = supplierRepository;
     }
 
-    @GetMapping("/admin/product/add")
+    @GetMapping("/staff/product/add")
     public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("suppliers", supplierRepository.findAll());
         return "add-Product";
     }
 
-    @PostMapping("/admin/product/add")
+    @PostMapping("/staff/product/add")
     public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult,
             Model model) {
         if (bindingResult.hasErrors()) {
