@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('User Details - Admin')}"></head>
+<body class="bg-light">
+
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white text-center py-3">
+                        <h4 class="mb-0" th:text="${user.id == null} ? 'Add New User' : 'Edit User'">User Form</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        
+                        <form th:action="@{/admin/users/save}" th:object="${user}" method="post">
+
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-bold">Username</label>
+                                <input type="text" class="form-control" id="username" th:field="*{username}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label fw-bold">Password</label>
+                                <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter password (leave blank or enter new to update)" th:required="${user.id == null}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="role" class="form-label fw-bold">Role Assignment</label>
+                                <select class="form-select" id="role" th:field="*{role}" required>
+                                    <option value="">-- Select a Role --</option>
+                                    <option value="ROLE_USER">ROLE_USER (Customer)</option>
+                                    <option value="ROLE_STAFF">ROLE_STAFF (Staff)</option>
+                                    <option value="ROLE_ADMIN">ROLE_ADMIN (Administrator)</option>
+                                </select>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Save User</button>
+                                <a th:href="@{/admin/users}" class="btn btn-outline-secondary">Cancel</a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footerScripts}"></div>
+</body>
+</html>
