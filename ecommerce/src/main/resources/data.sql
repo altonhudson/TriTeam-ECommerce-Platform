@@ -1,11 +1,10 @@
-
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('COMP-001', 'Sample Laptop', 999.99, 'computers', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('AUD-001', 'Wireless Headphones', 149.99, 'audio', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('PHONE-001', 'Smartphone Pro', 799.99, 'smartphones', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('NET-001', 'Wi-Fi 6 Router', 129.99, 'networking', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('NET-002', '8-Port Network Switch', 59.99, 'networking', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('ACC-001', 'USB-C Hub Adapter', 39.99, 'accessories', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('ACC-002', 'Wireless Mouse', 24.99, 'accessories', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('COMP-002', '27-inch 4K Monitor', 349.99, 'computers', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('AUD-002', 'Bluetooth Speaker', 89.99, 'audio', CURRENT_TIMESTAMP);
-MERGE INTO product (sku, name, unit_price, category, created_at) KEY(sku) VALUES ('OFF-001', 'Wireless Printer', 129.99, 'office supplies', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('COMP-001', 'Sample Laptop', 999.99, 'computers', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('AUD-001', 'Wireless Headphones', 149.99, 'audio', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('PHONE-001', 'Smartphone Pro', 799.99, 'smartphones', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('NET-001', 'Wi-Fi 6 Router', 129.99, 'networking', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('NET-002', '8-Port Network Switch', 59.99, 'networking', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('ACC-001', 'USB-C Hub Adapter', 39.99, 'accessories', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('ACC-002', 'Wireless Mouse', 24.99, 'accessories', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('COMP-002', '27-inch 4K Monitor', 349.99, 'computers', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('AUD-002', 'Bluetooth Speaker', 89.99, 'audio', CURRENT_TIMESTAMP);
+INSERT INTO product (sku, name, unit_price, category, created_at) VALUES ('OFF-001', 'Wireless Printer', 129.99, 'office', CURRENT_TIMESTAMP);
