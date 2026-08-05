@@ -9,6 +9,24 @@
 - **Developer 2:** Anthony Murphy - As a Tri-Team developer I plan on building my skills and knowledge of Java web development to create functional and scalable software with real world applications.
 - **Developer 3:** Matthew Walker - I enjoy turning ideas into practical applications, which is why I’m excited to work on our e-commerce project. My goal is to strengthen my web development skills and learn more about Java frameworks.
 
+### Deliverable 1: Team Contributions
+
+- **Alton Hudson:** Created the JPA entity classes and repository interfaces for the project's database tables. Wrote the dummy data used to populate the database so the application starts with realistic sample records that the team can use for testing and development.
+- **Anthony Murphy:** Created Controllers and Services that handle endpoints and data submission, performed bug fixing and project alignment ensuring cohesion of all branches.
+- **Matthew Walker:** Implemented the Thymeleaf frontend templates (home, category, add-product), built server-side pagination & search logic in `CategoryController` and configured server-side form validation for the `Product` entity.
+
+### How to Run the Project
+
+1. Clone this repository using Git.
+2. Open your terminal and navigate into the root of the project directory where the `pom.xml` file is located.
+3. Run the application using the included Maven wrapper:
+   - **Mac/Linux:** `./mvnw clean spring-boot:run`
+   - **Windows:** `mvnw clean spring-boot:run`
+4. Once the server starts up, open a web browser and navigate to `http://localhost:8080`.
+5. Log in using the following admin credentials:
+   - **Username:** `admin`
+   - **Password:** `admin123`
+
 ### Category Choice & Rationale
 
 - **Selected Category:** Category 1: E-Commerce Platform
@@ -43,11 +61,3 @@ Below are the wireframes illustrating our main application pages:
 
 * **Login View:** an authentication screen containing a centralized login form within the content container.
   <img width="1920" height="1080" alt="Login" src="https://github.com/user-attachments/assets/45b6375b-d341-45ec-94cd-ff2b03ee44a9" />
-
-### How to Run the Project
-
-1. Clone this repository using Git.
-2. Open the project folder in your Java IDE of choice
-3. Ensure Maven dependencies are downloaded (Web, Thymeleaf, JPA, Security and Data REST).
-4. Run the main Spring Boot application class.
-5. Open a web browser and navigate to `http://localhost:8080`.

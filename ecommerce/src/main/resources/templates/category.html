@@ -23,6 +23,8 @@
                     </div>
                     <div class="card-body">
                         <form th:action="@{/category}" method="get">
+                            <!-- Hidden input for remembering the search term -->
+                            <input type="hidden" name="keyword" th:value="${keyword}" />
                             <!-- Category Filter -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Category</label>
@@ -81,14 +83,14 @@
                         </div>
                     </div>
                 </div> 
-                
+
                 <!-- Pagination Controls -->
                 <nav th:if="${totalPages > 1}" class="mt-4 d-flex justify-content-center" aria-label="Product navigation">
                     <ul class="pagination">
                         <!-- Previous Page Button -->
                         <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
                             <a class="page-link" 
-                            th:href="@{/category(category=${activeCategory}, maxPrice=${currentMaxPrice}, sort=${currentSort}, page=${currentPage - 1})}">
+                            th:href="@{/category(category=${activeCategory}, maxPrice=${currentMaxPrice}, sort=${currentSort}, keyword=${keyword}, page=${currentPage - 1})}">
                                 Previous
                             </a>
                         </li>  
@@ -99,7 +101,7 @@
                         <!-- Next Page Button -->
                         <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
                             <a class="page-link" 
-                            th:href="@{/category(category=${activeCategory}, maxPrice=${currentMaxPrice}, sort=${currentSort}, page=${currentPage + 1})}">
+                            th:href="@{/category(category=${activeCategory}, maxPrice=${currentMaxPrice}, sort=${currentSort}, keyword=${keyword}, page=${currentPage + 1})}">
                                 Next
                             </a>
                         </li>

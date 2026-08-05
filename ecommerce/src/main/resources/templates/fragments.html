@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,24 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/category(param='all')}">Categories</a></li>
                 </ul>
-                <form class="d-flex me-3">
-                    <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                <!-- Search Form -->
+                <form class="d-flex" th:action="@{/category}" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search" name="keyword" th:value="${keyword}">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" th:href="@{/checkout(param='view')}">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link text-warning" th:href="@{/admin/product/add}">+ Add Product</a></li>
+
+                    <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'STAFF')"><a class="nav-link text-warning" th:href="@{/staff/product/add}">+ Add Product</a></li>
+
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link text-info" th:href="@{/admin/users}">Manage Users</a></li>
+
+                    <!-- Show Login if the user is not logged in -->
+                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/login}">Login</a></li>
+
+                    <!-- Show Logout if the user is logged in -->
+                    <li class="nav-item" sec:authorize="isAuthenticated()"><form th:action="@{/logout}" method="post" class="d-inline m-0"><button type="submit" class="nav-link bg-transparent border-0">Logout</button></form></li>
+
                 </ul>
             </div>
         </div>
