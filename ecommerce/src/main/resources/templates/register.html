@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Register - TriTeam E-Commerce')}"></head>
+<body class="bg-light">
+
+    <!-- Navbar Fragment -->
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-header bg-dark text-white text-center py-3">
+                        <h4 class="mb-0">Create an Account</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        
+                        <!-- Registration Form -->
+                        <form th:action="@{/register}" th:object="${user}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-bold">Username</label>
+                                <input type="text" class="form-control" id="username" th:field="*{username}" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-bold">Password</label>
+                                <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mb-3">Register</button>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <p class="text-muted">Already have an account? <a th:href="@{/login}">Login here</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Scripts Fragment -->
+    <div th:replace="~{fragments :: footerScripts}"></div>
+</body>
+</html>
