@@ -23,6 +23,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
+    // apply a unique constraint when table is generated to ensure no two rows are the same
+    @Column(unique = true)
     private String sku;
 
     @NotBlank(message = "Product name cannot be empty")
