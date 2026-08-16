@@ -31,14 +31,12 @@
                                     </div>
                                 </div>
 
-                                <!-- SKU -->
+                                <!-- SKU (generated automatically based on the selected category) -->
                                 <div class="col-md-6 mb-3">
                                     <label for="sku" class="form-label fw-bold">SKU (Stock Keeping Unit)</label>
-                                    <input type="text" class="form-control" id="sku" th:field="*{sku}"
-                                           th:classappend="${#fields.hasErrors('sku')} ? 'is-invalid' : ''">
-                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}">
-                                        SKU error message here.
-                                    </div>
+                                    <input type="text" class="form-control" id="sku"
+                                           value="Select a category" disabled>
+                                    <div class="form-text">Assigned on save based on the selected category.</div>
                                 </div>
                             </div>
 
@@ -86,5 +84,36 @@
     </div>
     <!-- Injecting footer scripts -->
     <div th:replace="~{fragments :: footerScripts}"></div>
+
+    <!-- script for fetching a live preview of the auto-generated SKU -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('category');
+            const skuField = document.getElementById('sku');
+
+            function updateSkuPreview() {
+                const category = categorySelect.value;
+                if (!category) {
+                    skuField.value = 'Select a category';
+                    return;
+                }
+                fetch('/staff/product/next-sku?category=' + encodeURIComponent(category))
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('Request failed');
+                        }
+                        return response.text();
+                    })
+                    .then(function (sku) {
+                        skuField.value = sku;
+                    })
+                    .catch(function () {
+                        skuField.value = 'Generated automatically';
+                    });
+            }
+            categorySelect.addEventListener('change', updateSkuPreview);
+            updateSkuPreview();
+        });
+    </script>
 </body>
 </html> 
