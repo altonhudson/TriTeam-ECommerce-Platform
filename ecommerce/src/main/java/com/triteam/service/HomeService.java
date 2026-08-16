@@ -2,8 +2,6 @@ package com.triteam.service;
 
 import org.springframework.stereotype.Service;
 import lombok.Getter;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 @Service
 @Getter

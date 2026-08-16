@@ -55,4 +55,26 @@ public class CartService {
         orderItem.setSubtotal(orderItem.getQuantity() * orderItem.getUnitPrice());
         orderItemRepository.save(orderItem);
     }
+
+    @Transactional
+    public void confirmOrder(String fullName, String phone, String address, String city, String postalCode,
+            String paymentMethod, double finalTotal) {
+
+        // Retrieve the current unsubmitted cart
+        Order activeOrder = orderRepository.findByStatus("CART")
+                .orElseThrow(() -> new RuntimeException("No active cart found to confirm."));
+
+        // Change status to complete the checkout (the next time a user adds an item,
+        // addProductToCart will generate a brand new "CART" order)
+        activeOrder.setStatus("PROCESSING");
+        activeOrder.setOrderDate(LocalDateTime.now());
+        activeOrder.setTotalAmount(finalTotal);
+        activeOrder.setFullName(fullName);
+        activeOrder.setPhone(phone);
+        activeOrder.setShippingAddress(address);
+        activeOrder.setCity(city);
+        activeOrder.setPostalCode(postalCode);
+        activeOrder.setPaymentMethod(paymentMethod);
+        orderRepository.save(activeOrder);
+    }
 }

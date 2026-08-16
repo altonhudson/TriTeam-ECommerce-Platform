@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Injecting head fragment -->
+<head th:replace="~{fragments :: head('Order Confirmed - TriTeam E-Commerce')}"></head>
+<body class="bg-light">
+    
+    <!-- Banner -->
+    <div class="banner border-bottom bg-success text-white">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Order Received!</h1>
+            <p class="lead">Thank you for shopping with TriTeam.</p>
+        </div>
+    </div>
+    
+    <!-- Injecting the navbar fragment -->
+    <div th:replace="~{fragments :: navbar}"></div>
+    
+    <!-- Confirmation Content Container -->
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg text-center border-0 rounded">
+                    <div class="card-body p-5">
+                        
+                        <!-- Success Icon & Header -->
+                        <h1 class="text-success mb-3" style="font-size: 4rem;">&#10004;</h1>
+                        <h2 class="fw-bold mb-3">Your order was placed successfully!</h2>
+                        
+                        <p class="fs-5 text-muted mb-4">
+                            We are currently processing your items and preparing them for shipment. You will receive an update once they are out for delivery.
+                        </p>
+                        
+                        <!-- Order Details Callout -->
+                        <div class="alert alert-info text-start p-4 mx-auto mb-5" style="max-width: 500px;">
+                            <h5 class="alert-heading fw-bold">Order Details</h5>
+                            <hr>
+                            <p class="mb-1"><strong>Status:</strong> Processing</p>
+                            <p class="mb-1"><strong>Payment Method:</strong> Cash on Delivery (COD)</p>
+                            <p class="mb-0 mt-3 small text-dark">
+                                <em>Please have the exact total ready upon the arrival of your package.</em>
+                            </p>
+                        </div>
+                        
+                        <!-- Navigation Actions -->
+                        <div class="d-grid gap-3 d-md-block">
+                            <a th:href="@{/home}" class="btn btn-primary btn-lg px-4 me-md-2">Return to Home</a>
+                            <a th:href="@{/category}" class="btn btn-outline-secondary btn-lg px-4">Continue Shopping</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Injecting footer scripts -->
+    <div th:replace="~{fragments :: footerScripts}"></div>
+</body>
+</html>
