@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: ecommerce
+  # Fallback profile. Overridden by -Dspring.profiles.active or --spring.profiles.active
+  profiles:
+    active: dev
+  jpa:
+    show-sql: true
+    # Lets data.sql run AFTER Hibernate creates the tables
+    defer-datasource-initialization: true
+server:
+  port: 8080
