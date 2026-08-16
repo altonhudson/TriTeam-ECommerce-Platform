@@ -34,3 +34,7 @@ build/
 
 ### H2 Console ###
 *.trace.db
+
+### H2 Database files ###
+*.mv.db
+*.trace.db
