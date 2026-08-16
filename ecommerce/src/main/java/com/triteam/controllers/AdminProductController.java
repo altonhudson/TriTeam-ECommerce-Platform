@@ -11,6 +11,9 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.triteam.service.SkuService;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AdminProductController {
@@ -21,11 +24,13 @@ public class AdminProductController {
                                                            // doesn't save to the inventory repo, consider an ADMIN
                                                            // action to update inventory repo?
 
-    public AdminProductController(ProductRepository productRepository, SupplierRepository supplierRepository,
-            InventoryRepository inventoryRepository) {
+    private final SkuService skuService;
+
+    public AdminProductController(ProductRepository productRepository, SupplierRepository supplierRepository, InventoryRepository inventoryRepository, SkuService skuService) {
         this.inventoryRepository = inventoryRepository;
         this.productRepository = productRepository;
         this.supplierRepository = supplierRepository;
+        this.skuService = skuService;
     }
 
     @GetMapping("/staff/product/add")
@@ -35,6 +40,13 @@ public class AdminProductController {
         return "add-Product";
     }
 
+    // Returns the auto-generated SKU for a category to give a live preview on the form in the frontend
+    @GetMapping("/staff/product/next-sku")
+    @ResponseBody
+    public String previewNextSku(@RequestParam String category) {
+        return skuService.generateSku(category);
+    }
+
     @PostMapping("/staff/product/add")
     public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult,
             Model model) {
@@ -42,6 +54,7 @@ public class AdminProductController {
             model.addAttribute("suppliers", supplierRepository.findAll());
             return "add-Product";
         }
+        product.setSku(skuService.generateSku(product.getCategory())); // set SKU
         productRepository.save(product);
 
         return "redirect:/category";
