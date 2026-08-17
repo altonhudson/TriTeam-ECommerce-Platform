@@ -15,17 +15,63 @@
 - **Anthony Murphy:** Created Controllers and Services that handle endpoints and data submission, performed bug fixing and project alignment ensuring cohesion of all branches.
 - **Matthew Walker:** Implemented the Thymeleaf frontend templates (home, category, add-product), built server-side pagination & search logic in `CategoryController` and configured server-side form validation for the `Product` entity.
 
+### Configuration & Profiles
+ 
+The application has been configured with a hierarchical structure of YAML files:
+- `application.yml` - settings shared in every environment (consists of: application name, server port, SQL logging).
+- `application-dev.yml` - dev profile. Uses an in-memory **H2** database with the H2 console enabled.
+- `application-prod.yml` - production/QA profile. Connects to a persistent MySQL db.
+Switching between these environments can be performed by setting a different profile at startup (explained in the 'How to Run the Project' section below). If no profile is specified, the application defaults to `dev`.
+ 
+| | `dev` | `prod` |
+|---|---|---|
+| Database | H2, in-memory | MySQL, persistent |
+| Schema | Rebuilt on every start | Preserved between runs |
+| Sample data | Seeded from `data.sql` | Not seeded |
+| H2 console | Enabled at `/h2-console` | Disabled |
+| Setup required | None | Local MySQL server |
+ 
 ### How to Run the Project
-
-1. Clone this repository using Git.
-2. Open your terminal and navigate into the root of the project directory where the `pom.xml` file is located.
-3. Run the application using the included Maven wrapper:
+ 
+1. Clone this repository.
+2. Open your terminal and navigate into the `ecommerce` directory (where the `pom.xml` file is located).
+3. Run the application using the included Maven wrapper.
+   **Development profile (H2, no setup required):**
    - **Mac/Linux:** `./mvnw clean spring-boot:run`
-   - **Windows:** `mvnw clean spring-boot:run`
+   - **Windows:** `.\mvnw.cmd clean spring-boot:run`
+   **Production/QA profile (requires MySQL):**
+   - **Mac/Linux:** `./mvnw spring-boot:run -Dspring-boot.run.profiles=prod`
+   - **Windows:** `.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=prod"` 
 4. Once the server starts up, open a web browser and navigate to `http://localhost:8080`.
 5. Log in using the following admin credentials:
    - **Username:** `admin`
    - **Password:** `admin123`
+#### Running with the `prod` profile
+ 
+The `prod` profile requires a local MySQL server running on port 3306. The database does not need to be created manually. The connection URL includes `createDatabaseIfNotExist=true` so MySQL creates the `triteam_ecommerce` schema on first run and Hibernate builds the tables.
+ 
+Credentials are injected via environment variables each having a fallback value so the app runs without any additional configuration:
+ 
+| Variable | Default | Description |
+|---|---|---|
+| `DB_HOST` | `localhost` | MySQL host |
+| `DB_PORT` | `3306` | MySQL port |
+| `DB_NAME` | `triteam_ecommerce` | Schema name |
+| `DB_USERNAME` | `root` | MySQL user |
+| `DB_PASSWORD` | `root` | MySQL password |
+ 
+**Important note:** If your MySQL root password is not `root`, set `DB_PASSWORD` before starting the application:
+ 
+- **Mac/Linux:** `DB_PASSWORD=yourpassword ./mvnw spring-boot:run -Dspring-boot.run.profiles=prod`
+- **Windows (PowerShell):** `$env:DB_PASSWORD="yourpassword"` then run the `prod` command above.
+Note that the `prod` profile starts with an empty product catalogue. Sample data from `data.sql` is only loaded into the in-memory `dev` database, which prevents duplicate records from accumulating in a persistent database on every restart. Products can be added through the admin interface and will persist between runs.
+ 
+#### Accessing the H2 console (`dev` only)
+ 
+With the application running under the `dev` profile, log in as an administrator and navigate to `http://localhost:8080/h2-console`. Connect using:
+- **JDBC URL:** `jdbc:h2:mem:triteamdb`
+- **User Name:** `sa`
+- **Password:** *(leave blank)*
 
 ### Category Choice & Rationale
 
