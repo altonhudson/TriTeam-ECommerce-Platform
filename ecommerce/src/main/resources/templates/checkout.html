@@ -70,12 +70,78 @@
                             <strong>Total</strong>
                             <strong th:text="'$' + ${total != null ? #numbers.formatDecimal(total, 1, 2) : '0.00'}">$0.00</strong>
                         </div> 
-                        <!-- Checkout Button (Disabled if Empty Cart) -->
-                        <button class="btn btn-success w-100 btn-lg" th:disabled="${#lists.isEmpty(cartItems)}">Proceed to Checkout</button>
+                        <!-- Proceed to Shipping Button (Disabled if Empty Cart) -->
+                        <a href="#checkout-details" class="btn btn-secondary w-100 btn-lg" th:if="${not #lists.isEmpty(cartItems)}">Continue to Shipping &darr;</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- BOTTOM ROW: Shipping & Payment Form (Only renders if cart is not empty) -->
+        <form th:action="@{/order/confirm}" method="post" th:if="${not #lists.isEmpty(cartItems)}" id="checkout-details">
+            <hr class="mb-4">
+            <div class="row">
+                
+                <!-- Shipping Information -->
+                <div class="col-md-8 mb-4">
+                    <div class="card shadow-sm border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Shipping Information</h5>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Full Name</label>
+                                    <input type="text" name="fullName" class="form-control" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Phone Number</label>
+                                    <input type="tel" name="phone" class="form-control" placeholder="(555) 555-5555" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Street Address</label>
+                                <input type="text" name="address" class="form-control" placeholder="123 Main St, Apt 4B" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">City</label>
+                                    <input type="text" name="city" class="form-control" placeholder="Cityville" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Postal Code</label>
+                                    <input type="text" name="postalCode" class="form-control" placeholder="12345" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-success">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Payment Method</h5>
+                        </div>
+                        <div class="card-body p-4">
+                            <!-- Locked to COD -->
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="cod" value="COD" checked readonly>
+                                <label class="form-check-label fw-bold text-dark" for="cod">
+                                    Cash on Delivery (COD)
+                                </label>
+                            </div>
+                            
+                            <div class="alert alert-warning small mb-4">
+                                <strong>Note:</strong> You will pay for your order using cash when the delivery courier arrives at your shipping address.
+                            </div>
+                            
+                            <!-- Final Checkout Submission -->
+                            <button type="submit" class="btn btn-success w-100 btn-lg fw-bold shadow">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
     <!-- Injecting footer scripts -->
     <div th:replace="~{fragments :: footerScripts}"></div>

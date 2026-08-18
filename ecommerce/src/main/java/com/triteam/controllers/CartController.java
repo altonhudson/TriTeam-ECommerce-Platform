@@ -52,6 +52,34 @@ public class CartController {
         return "checkout";
     }
 
+    @PostMapping("/order/confirm")
+    public String confirmOrder(
+            @RequestParam(required = false) String fullName,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String address,
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String postalCode,
+            @RequestParam(required = false) String paymentMethod,
+            HttpSession session) {
+
+        List<Product> cart = (List<Product>) session.getAttribute("cart");
+        double finalTotal = 0.0;
+
+        if (cart != null && !cart.isEmpty()) {
+            double subtotal = cart.stream().mapToDouble(Product::getUnitPrice).sum();
+            double tax = subtotal * 0.13;
+            finalTotal = subtotal + tax;
+        }
+        // save order to database
+        cartService.confirmOrder(fullName, phone, address, city, postalCode, paymentMethod, finalTotal);
+
+        // Clear the cart from the session after successful checkout
+        session.removeAttribute("cart");
+
+        // Return the order-success.html template
+        return "order-success";
+    }
+
     // Route for adding an item to the cart
     @PostMapping("/cart/add")
     public String addToCart(@RequestParam Long productId, HttpSession session, HttpServletRequest request) {

@@ -17,12 +17,17 @@ public class Order {
     private Long orderId;
 
     private String orderNumber;
+    private String fullName;
     private String status;
     private LocalDateTime orderDate;
     private Double taxAmount;
     private Double shippingCost;
     private String shippingAddress;
+    private String city;
+    private String postalCode;
+    private String phone;
     private String trackingNumber;
     private Double totalAmount;
+    private String paymentMethod;
     private String notes;
 }
